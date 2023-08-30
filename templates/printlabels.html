@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Høybråten Kunstutstilling - Utskrift av lapper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" language="javascript">// <![CDATA[
+function startaction() {
+  i = 0;
+  setInterval(function() {
+    i = ++i % 4;
+    $(".loading").text("Loading Animation " + Array(i+1).join("."));
+  }, 800);
+}
+// ]]>
+</script>
+<style>
+body {
+  font-family: Arial;
+  /*background: #2d2d2f;*/ 
+}
+
+div { margin: 20px; }
+.loading { 
+  font-size: 1.5em; 
+  font-family: Georgia; 
+  /*color: #f0f0f0;*/
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #0c68b2;
+  color: yellow;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.topheading {
+  display: flex;
+  justify-content: left;
+}
+
+</style>
+  </head>
+  <body>
+	<div class="topheading">
+		<div><a href="/"><img src="/images/Lions.png" width="80" height="80"></a></div>
+		<div><h1>Utskrift av lapper</h1></div>
+	</div>
+	
+	<p>Her kan du skrive ulike bildenummer, delt med komma for å legge de til listen:</p>
+	<form class="example" action="/addprint">
+	  <input type="text" placeholder="Bildenummer, separert med komma; 12345, 23456, osv..." name="q">
+	  <button type="submit"><i class="fa fa-submit">Legge til</i></button>
+	</form>
+	
+    <p>Her kan du søke på kunstnernavn eller bildenavn. <br>Du trenger bare deler av ord da f.eks.'Som' finner 'Sommernatt':</p>
+	<form class="example" action="/searchprint">
+	  <input type="text" placeholder="Bildenavn eller kunstnernavn..." name="q" onKeyUp="startaction()">
+	  <button type="submit"><i class="fa fa-search"></i></button>
+	</form>
+	<div>
+
+	<p>Følgende bilder er valgt ut for utskrift:</p>
+
+		<br><br>
+		<label>Start med label nummer (for delvis brukte ark):</label>
+             <select id = "startLabel">
+               <option value = "1">1</option>
+               <option value = "2">2</option>
+               <option value = "3">3</option>
+               <option value = "4">4</option>
+               <option value = "5">5</option>
+               <option value = "6">6</option>
+               <option value = "7">7</option>
+               <option value = "8">8</option>
+             </select>
+        <br>
+		<a href="/doprint">(Skriv ut listen)</a>
+		
+		<br><br>
+		<a href="/emptyprint">(Tøm listen)</a>
+			
+		<br><br>
+		<a href="/">(HOME)</a>
+	</div>
+	<div class="loading">Loading Animation</div>
+  </body>
+</html>

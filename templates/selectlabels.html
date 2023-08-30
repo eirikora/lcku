@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-150363083-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-150363083-1');
+</script>
+
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Høybråten Kunstutstilling - Velge lapper som skal skrives ut</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script type="text/javascript" language="javascript">// <![CDATA[
+function checkAll(formname, checktoggle)
+{
+  var checkboxes = new Array(); 
+  checkboxes = document[formname].getElementsByTagName('input');
+ 
+  for (var i=0; i<checkboxes.length; i++)  {
+    if (checkboxes[i].type == 'checkbox')   {
+      checkboxes[i].checked = checktoggle;
+    }
+  }
+}
+// ]]>
+</script>
+<style>
+body {
+  font-family: Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #0c68b2;
+  color: yellow;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #0c68b2;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form input[type=button] {
+  float: left;
+  width: 10%;
+  padding: 10px;
+  background: #0c68b2;
+  color: white;
+  font-size: 17px;
+  border: 3px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:30px;
+    height:30px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+}
+input[type='checkbox']:checked {
+    background: darkgreen;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.topheading {
+  display: flex;
+  justify-content: left;
+}
+
+</style>
+  </head>
+  <body>
+	<div class="topheading">
+		<div><a href="/"><img src="/images/Lions.png" width="80" height="80"></a></div>
+		<div><h1>Utskrift av lapper</h1></div>
+	</div>
+	
+   <form name='form3' action='/picklabels' method='POST' id='submitform'>
+
+		<h2>Velg de bildene som skal være med:</h2>
+
+		<div>
+		<input type="button" value="Velg alle" onclick="javascript:checkAll('form3', true);">
+		&nbsp;&nbsp;&nbsp;
+		<input type="button" value="Ta bort alle" onclick="javascript:checkAll('form3', false);">
+		<br>
+		</div>
+		<div>
+		
+		<table style="width: 100%;" border="0.0" cellpadding="5">
+			<tbody>
+		{% for bildedata in bildesett %}
+			  <tr>
+				  <td align="center" >
+					<div class="checkbox">
+						  <label><input type="checkbox" name="check" value="{{ bildedata[0] }}"></label>
+					  </div>
+				  </td>
+				  <td>{{ bildedata[0] }}</td>
+				  <td><b>{{ bildedata[1] }}</b></td>
+				  <td>{{ bildedata[2] }}</td>
+				  <td>{{ bildedata[3] }}</td>
+				  <td>{{ bildedata[4] }}</td>
+			  </tr>
+		{% endfor %}
+			</tbody>
+		</table>
+		</div>
+	
+		<br>
+		<div>
+		<button type="submit" class="btn btn-success">Legg til valgte bilder</button>
+		</div>
+  	</form>
+
+	
+  </body>
+</html>

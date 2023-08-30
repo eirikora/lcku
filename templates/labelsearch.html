@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-150363083-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-150363083-1');
+</script>
+
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Høybråten Kunstutstilling - Utskrift av salgslapper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script language="javascript">// <![CDATA[
+
+
+$('#valgtebilder').submit(function() {
+  alert('Handler for .submit() called.');
+  return false;
+});
+
+$('#valgtebilder2').submit(function() {
+	i = 0;
+	$(".loading").text("BANG");
+	setInterval(function() {
+	  i = ++i % 7;
+	  $(".loading").text("Lager PDF" + Array(i+1).join("."));
+	}, 800);
+	sleep(3000)
+    return false; // return false to cancel form action
+});
+// ]]>
+</script>
+<script type="text/javascript" language="javascript">// <![CDATA[
+function process1() {
+    document.getElementById("hiddenbilder").value = (document.getElementById("bilder").value);
+    }
+// ]]>
+</script>
+<style>
+body {
+  font-family: Arial;
+}
+
+div { margin: 20px; }
+.loading { 
+  font-size: 2em; 
+  font-family: Georgia; 
+  color: green;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #0c68b2;
+  color: yellow;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.topheading {
+  display: flex;
+  justify-content: left;
+}
+
+form.example label {
+  font-weight: bold;
+}
+
+</style>
+  </head>
+  <body>
+	<div class="topheading">
+		<div><a href="/"><img src="/images/Lions.png" width="80" height="80"></a></div>
+		<div><h1>Utskrift av salgslapper</h1></div>
+	</div>
+	{% if nofind %}
+	<p><b><font color="red">PROBLEM: FANT IKKE DET DU SØKER I DATABASEN! PRØV IGJEN!</font></b></p>
+	{% endif %}
+	{% if utskrift %}
+	<div>
+	<table style="width: 80%;" border="1" cellpadding="5">
+	<tbody>
+	<tr>
+	<td align="center" bgcolor=#FAE670><br>Salgslapper er klare for utskrift <a href="/labels.pdf" target="_blank" rel="noopener noreferrer">HER (åpner nytt vindu)</a><br>&nbsp;</td>
+	</tr>
+	</tbody>
+	</table>
+	<br>
+	</div>
+	{% endif %}
+	
+    <p>Her kan du søke på salgsnummer, kunstnernavn eller bildenavn. <br>Du trenger bare deler av ord da f.eks.'Som' finner 'Sommernatt':</p>
+	<form class="example" action="/selectlabels">
+	  <br>Søke etter flere bilder:<br>
+	  <input id="hiddenbilder" type="hidden" value="{{ valgtebilder }}" name="b">
+	  <input type="text" placeholder="Salgsnummer, bildenavn eller kunstner..." name="q">
+	  <button type="submit"><i class="fa fa-search"></i></button>
+	</form>
+	<div>
+	<br>Skriv ut valgte salgslapper:<br>
+	<form id="valgtebilder" class="example" action="/printlabels" target="_blank">
+		<label for="firstlabel">Første posisjon å printe fra:</label>
+		<select id="firstlabel" name="firstlabel">
+			<option value="1">1 (helt ark)</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+		</select>
+		<br>
+		<label for="bilder">Valgte salgslapper:</label><br>
+		<input id="bilder" type="text" placeholder="Bildenummer, bildenummer, ..." value="{{ valgtebilder }}" onKeyUp="process1()" name="b">
+		<button type="submit"><i class="fa fa-print"></i></button>
+	</form>
+	</div>
+	<div class="loading"></div>
+	<div>
+		<br><br>
+		<a href="/">(HOME)</a>
+	</div>
+  </body>
+</html>

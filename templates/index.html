@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-150363083-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-150363083-1');
+</script>
+
+  	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Høybråten Kunstutstilling - Kunstdatabase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(odd) {
+  background-color: #f2f2f2
+}
+
+form.menu::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.containermenu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.topheading {
+  display: flex;
+  justify-content: left;
+}
+
+p{
+  font-family: arial;
+  font-weight: bold;
+}
+.standard{
+  background-color: #2a609a;
+	width: 100%;
+	height: 60px;
+  color: white;
+  outline: none;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.status{
+  font-size: 14px;
+  font-style: italic;
+}
+.admin{
+  background-color: #2a609a;
+	width: 100%;
+	height: 60px;
+  color: white;
+  background: #aa0000;
+  outline: none;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.block-display button{
+  margin-bottom:5px;
+  display:block;
+}
+
+.button:hover{
+  background-color: #32CD32;
+  font-size: 20px;
+  transition: 0.5s;
+}
+
+</style>
+  </head>
+  <body>
+	<div class="topheading">
+		<div><img src="/images/Lions.png" width="80" height="80"></div>
+		<div><h1>Kunstdatabase</h1></div>
+	</div>
+   
+    <div>
+		<b>Hovedside - valg av oppgave.</b><br><br>
+	</div>
+	<div class="status">Status: {{ antall_bilder }} bilder - {{ antall_solgt }} solgt<br>
+	</div>
+
+	
+	    <form class="menu" method="post" action="/">
+	    	<div class="block-display">
+ 				<button class="standard" type="submit" formmethod="post" name="Søke">Søke KunstDB</button>
+ 				<button class="standard" type="submit" formmethod="post" name="Statistikk">Hvem selger mest?</button>
+ 				<button class="standard" type="submit" formmethod="post" name="Støtte">Hva går inntekten til?</button>
+  				<button class="standard" type="submit" formmethod="post" name="Homepage">Om Høybråten Lions</button>
+  				<button class="standard" type="submit" formmethod="post" name="Facebook">Lik og følg oss på Facebook</button>
+  				<button class="admin" type="submit" formmethod="post" name="Admin">Administrasjon</button>
+			</div>
+        </form>
+	</div>
+
+  </body>
+</html>
