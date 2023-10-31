@@ -98,6 +98,8 @@ def process_row(salgsnummer, kunstner, bildenavn, pris, kommentar):
 	now = datetime.datetime.now(timezone('Europe/Berlin'))
 	
 	salgsid = int(salgsnummer)
+	bildenavnstr = str(bildenavn)
+	kunstnerstr = str(kunstner)
 	
 	salgsprisfloat = 0.0
 	if isinstance(pris, str):
@@ -118,8 +120,8 @@ def process_row(salgsnummer, kunstner, bildenavn, pris, kommentar):
 	
 	if acceptedrow:
 		#kunstdatabase.insert_database(salgsid, bildenavn, kunstner, salgspris, kommentar)
-		kunstdatabase.insert_database_RAM(salgsid, bildenavn, kunstner, salgspris, kommentar)
-		print('Valid entry:' + str(salgsid) + '/' + bildenavn + '/' + kunstner + '/' + str(pris) + '/' + kommentar)
+		kunstdatabase.insert_database_RAM(salgsid, bildenavnstr, kunstnerstr, salgspris, kommentar)
+		print('Valid entry:' + str(salgsid) + '/' + bildenavnstr + '/' + kunstnerstr + '/' + str(pris) + '/' + kommentar)
 	else:
 		numProcErrors = numProcErrors + 1
 		print("FAILED to process entry due to: " + rowerrors + "\n")

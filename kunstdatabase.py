@@ -95,6 +95,8 @@ def makesalestable():
 def insert_database_RAM(salgsid, bildenavn, kunstner, salgspris, kommentar):
 	global KUNSTDB
 	global SEARCHDB
+	#print("bildenavn is:" + str(bildenavn))
+	#print("kunstner is:"+ str(kunstner)) 
 	salgsidstr = '%05d' % (int(salgsid))
 	bildenavn = bildenavn.replace("\'", "").replace("\"", "")
 	kommentar = kommentar.replace("\'", "").replace("\"", "")
