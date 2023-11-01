@@ -1,5 +1,5 @@
-Flask==3.0.0
-flask-babel==3.1.0
+Flask==2.0.2
+Werkzeug==2.2.2
 Flask-Table==0.5.0
 gunicorn==21.2.0
 gspread==5.10.0

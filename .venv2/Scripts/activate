@@ -1,0 +1,72 @@
+# This file must be used with "source bin/activate" *from bash*
+# you cannot run it directly
+
+deactivate () {
+    # reset old environment variables
+    if [ -n "${_OLD_VIRTUAL_PATH:-}" ] ; then
+        PATH="${_OLD_VIRTUAL_PATH:-}"
+        export PATH
+        unset _OLD_VIRTUAL_PATH
+    fi
+    if [ -n "${_OLD_VIRTUAL_PYTHONHOME:-}" ] ; then
+        PYTHONHOME="${_OLD_VIRTUAL_PYTHONHOME:-}"
+        export PYTHONHOME
+        unset _OLD_VIRTUAL_PYTHONHOME
+    fi
+
+    # This should detect bash and zsh, which have a hash command that must
+    # be called to get it to forget past commands.  Without forgetting
+    # past commands the $PATH changes we made may not be respected
+    if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
+        hash -r 2> /dev/null
+    fi
+
+    if [ -n "${_OLD_VIRTUAL_PS1:-}" ] ; then
+        PS1="${_OLD_VIRTUAL_PS1:-}"
+        export PS1
+        unset _OLD_VIRTUAL_PS1
+    fi
+
+    unset VIRTUAL_ENV
+    unset VIRTUAL_ENV_PROMPT
+    if [ ! "${1:-}" = "nondestructive" ] ; then
+    # Self destruct!
+        unset -f deactivate
+    fi
+}
+
+# unset irrelevant variables
+deactivate nondestructive
+
+VIRTUAL_ENV="C:\Users\eor\Dev\lcku\.venv2"
+export VIRTUAL_ENV
+
+_OLD_VIRTUAL_PATH="$PATH"
+PATH="$VIRTUAL_ENV/Scripts:$PATH"
+export PATH
+
+# unset PYTHONHOME if set
+# this will fail if PYTHONHOME is set to the empty string (which is bad anyway)
+# could use `if (set -u; : $PYTHONHOME) ;` in bash
+if [ -n "${PYTHONHOME:-}" ] ; then
+    _OLD_VIRTUAL_PYTHONHOME="${PYTHONHOME:-}"
+    unset PYTHONHOME
+fi
+
+if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
+    _OLD_VIRTUAL_PS1="${PS1:-}"
+    PS1="(.venv2) ${PS1:-}"
+    export PS1
+    VIRTUAL_ENV_PROMPT="(.venv2) "
+    export VIRTUAL_ENV_PROMPT
+fi
+
+# This should detect bash and zsh, which have a hash command that must
+# be called to get it to forget past commands.  Without forgetting
+# past commands the $PATH changes we made may not be respected
+if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
+    hash -r 2> /dev/null
+fi
+
+GOOGLE_SHEETS_CREDS_JSON=eyJ0eXBlIjogInNlcnZpY2VfYWNjb3VudCIsICJwcm9qZWN0X2lkIjogInNraWxmdWwtZnJhbWUtMTQ2MTEwIiwgInByaXZhdGVfa2V5X2lkIjogImIyYjRjYzBmNDZiYjQ2ZmY4MWEyN2NiNTQ5YTU1NGRmM2U0MTRiZDkiLCAicHJpdmF0ZV9rZXkiOiAiLS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tXG5NSUlFdndJQkFEQU5CZ2txaGtpRzl3MEJBUUVGQUFTQ0JLa3dnZ1NsQWdFQUFvSUJBUURqOHo3eE9UQkZHc01xXG5wN0NKL0dpTDN6UHBBcGhLbVJxOWRvaU0raU50UGh1NVMyM3dZalhObFNQTzc2dm81SXM3SVRKTEdUM1lqRWk4XG5qQzRobDBhVEdWdTV2bHp5MXo5S3R2ZEZLTkdWQWZuNHpxVFV1OWorcXNtTjNoWlNXakM0VS8xaFBNbG9NcUUvXG53T3EweE9Vd1FWYXZRZ1hHRmE0TlJZVGRaN1J1ckJhaDl1c2pOa2ZwVEF0b3N6cEluQU9YcXNFOXBqVGNKMTFEXG5kZk5Kcm5Ta05QV0l5MkFYZDlPQ0RMNWRlUHQza0FVL2xkKzRuZWNWc3NoWWtQbkQzaHppZHN5RkY4QVd3aVFsXG4rQUxjcStBSXVGSXZPazd5bUc0TEZBOXRKbGF0NE02Qm5pU1c2K3lzSWdOcVdta0JDeHZBNzZVbk9xRU9MMW5BXG5sOFRkc1VpakFnTUJBQUVDZ2dFQWF5ZjE5ci9EaVRqRGRsSE9FNCtzTmRSL09wSVZ0VHV6N2t6Q2RFTkNWQ0JXXG5PQXpWYWFOQlY1czhjaE1JNVRwS21VbEpzelB5ZHRHN2Y2Y0dLSlJNZ09ueXpLWklXNEFFS01OS0NpRGVKUVlBXG4xSTJQdnRGdmVJZ2dwNmczSmc5dng3Yno3Ym45bEJYNDUxZHcvZmx4SS9ZVEllQVBoc2E2UTFMaTJwSGRxQWdxXG5VYnNmVGpES0hCbkk3NEJ2eEJ2ajJKMk9Wd3RpVGgwbWM5aWJzdkh1OC9yS3N2MFNsWTFyZGZhWnJmdXdxQnhnXG5hU0FkY2xOZHNmK1BQVHk4eXpkdlVMSnBza2RDbUQwKzBtUm5WODlPM3k4RGxFM3pkMGo1ZG5pZ0pxV3hieGZuXG5pN1N5dU5ocXFKTG0vMmgyQytZZmg0RjdPK3BjcjBuMmErMEphNzN0UVFLQmdRRCtMcTQrR0JxYXdFcmVMajlVXG41SWkrMEVEY0dPTkI5ZUJaVjlPRE9LQ0k0RTlxY3VWLzUwbjExc3pKRGtURC9wR3JwSXhYcjZDbXZPWlZvbGYzXG40T3BRZmZBQVRDaFhUV2FpUjl0eG8rcDJXd0JGVFlPUnBvbWE5eHNCeno5b3JURnFnR1hNbDZWRlJDUUJwS25oXG43elV2azU2WGlYM1VEN0NNTEQyMFlhSnRkd0tCZ1FEbGxJc1R2UDlyNkFaaTdqRnRCL21zK2V5SGtzUHZUQitmXG5tWHBLTmt6OXV5eDhBNDFxZ09HYjlsblNDZlVrWE1RTHlGNmlBYzJXZEp2RzlyenlJYzNBd2h4WmNnZkQvd0ZPXG5qUXpkVFU3UmwrNnJ1M291ZG03UFhDWVJyWXE1K24zZ2pSNElQd0FvOWM1cDJ0VmdhU2FZb3RhVXlMTjlOWHQvXG5qYzd6b0tBWk5RS0JnUUR5Qy9IUkg1TDJHbmN3N0VsU3hlMlNCeTQ4YVZhLzBTdzY1Kzk2M2NuQmpoa1IvU2VlXG5qTmxaU1pycE9yVXhEcElaS1RDYnI1c0VMSTRLcmZXbkRuOFM5MW84YmtsY0dWREs2REtJSE5lQXJWZXNwd3ZLXG4veE82aGVVcDYva3Q3UDlKczhzODhJdHBVbUlYVG42WHIvcXR1NTBpSU1PNTFOY0NKSDc5N3B1R01RS0JnUUNDXG5vdC93djE3b1hBTW1VRHUzdXc0THE3czMrZitjTDBqZlhFb0Y2Smd1MlU4YTBqcXFHK1JGQncxZFEyVkc1N0oyXG5zZkdIWmxkQ0FlQ1NldHhSTzRNRTZHK1JSaDI5SFdIMC9MWVJSMmhPUTVJQURwSWIxakIvdGdQRGsyaVpJengxXG5obGRNZ2V6cFlkV3V6bU1VbFVEdElkdlFsZFBzcjM0eXV0TEVOdVppOFFLQmdRRDMxOVZVQ1dYWXMxM2dmYThmXG5TcEduVERXVjRjZFBiRDJ4S0VMSFVZd3E5ZTNmRURYVmU1TG5SdVFnblR4L1RybHFlK2Uyemw5L0FFNEZQV3kzXG5uUm5oTmJmTnUzd3Y5SUJnTzBKQVpQa2xYdENab0hxRFdua0Z5UmpBdldYSDZsNHA5VGJsNEVubDgrVWgzVXp0XG5uTVM3OENNU0t4eTF4SEFQbW5uV2sremlldz09XG4tLS0tLUVORCBQUklWQVRFIEtFWS0tLS0tXG4iLCAiY2xpZW50X2VtYWlsIjogImR1Z25hZHNsaXN0ZUBza2lsZnVsLWZyYW1lLTE0NjExMC5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbSIsICJjbGllbnRfaWQiOiAiMTAxNzc3NTE4NTA3MTc0Nzg2MzQ0IiwgImF1dGhfdXJpIjogImh0dHBzOi8vYWNjb3VudHMuZ29vZ2xlLmNvbS9vL29hdXRoMi9hdXRoIiwgInRva2VuX3VyaSI6ICJodHRwczovL29hdXRoMi5nb29nbGVhcGlzLmNvbS90b2tlbiIsICJhdXRoX3Byb3ZpZGVyX3g1MDlfY2VydF91cmwiOiAiaHR0cHM6Ly93d3cuZ29vZ2xlYXBpcy5jb20vb2F1dGgyL3YxL2NlcnRzIiwgImNsaWVudF94NTA5X2NlcnRfdXJsIjogImh0dHBzOi8vd3d3Lmdvb2dsZWFwaXMuY29tL3JvYm90L3YxL21ldGFkYXRhL3g1MDkvZHVnbmFkc2xpc3RlJTQwc2tpbGZ1bC1mcmFtZS0xNDYxMTAuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20ifQ==
+export GOOGLE_SHEETS_CREDS_JSON
