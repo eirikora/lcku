@@ -57,6 +57,12 @@ form.example::after {
 		<div><h1>Kunstdatabase</h1></div>
 	</div>
     <p>Her kan du søke på salgsnummer, kunstnernavn eller bildenavn. <br>Du trenger bare deler av ord da f.eks.'Som' finner 'Sommernatt':</p>
+	{% if error %}
+	<div style="background-color: #ffcccc; border: 1px solid #ff0000; padding: 10px; margin: 10px 0; color: #cc0000; font-weight: bold;">
+		⚠️ FEIL: {{ error }}
+	</div>
+	{% endif %}
+	
 	<form class="example" action="/search">
 	  <input type="text" placeholder="Salgsnummer, bildenavn eller kunstner..." name="q">
 	  <button type="submit"><i class="fa fa-search"></i></button>

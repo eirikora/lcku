@@ -110,6 +110,11 @@ p{
 	</div>
 	<div class="status">Status: {{ antall_bilder }} bilder - {{ antall_solgt }} solgt<br>
 	</div>
+	{% if error %}
+	<div style="background-color: #ffcccc; border: 1px solid #ff0000; padding: 10px; margin: 10px 0; color: #cc0000; font-weight: bold;">
+		⚠️ FEIL: {{ error }}. Databasen er ikke tilgjengelig.
+	</div>
+	{% endif %}
 
 	
 	    <form class="menu" method="post" action="/">

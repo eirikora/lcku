@@ -12,6 +12,10 @@ import salesloader
 import makelabels
 import time
 from secrethandler import getsecret, getsecret_int
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 google_form_url = getsecret("GOOGLE_FORM_URL")
 
@@ -120,11 +124,15 @@ def index():
 		pass
 		# return render_template("index.html")
 		#print("No Post Back Call")
-	kunstdatabase.validate_database()
-	kunstdatabase.validate_salesdata()
-	antall_bilder = kunstdatabase.get_num_pictures()
-	antall_solgt = kunstdatabase.get_num_sold()
-	return render_template("index.html", antall_bilder=antall_bilder, antall_solgt = antall_solgt)
+	try:
+		kunstdatabase.validate_database()
+		kunstdatabase.validate_salesdata()
+		antall_bilder = kunstdatabase.get_num_pictures()
+		antall_solgt = kunstdatabase.get_num_sold()
+		return render_template("index.html", antall_bilder=antall_bilder, antall_solgt = antall_solgt)
+	except Exception as e:
+		print(f"Database validation failed: {e}")
+		return render_template("index.html", antall_bilder=0, antall_solgt=0, error="Google Sheets connection failed")
 
 @app.route("/search")
 def search():
@@ -134,16 +142,20 @@ def search():
 	elif searchword.isdigit():
 		return redirect('/s/'+searchword, code=301)
 	elif len(searchword) > 0:
-		kunstobjekter = kunstdatabase.searchrecords_RAM(searchword)
-		if kunstobjekter == None or len(kunstobjekter) < 1:
-			return render_template("searchfailed.html")
-		else:
-			#DISPLAY RESULTS
-			items = []
-			for kunstobjekt in kunstobjekter:
-				items.append(Item('%05d' % (kunstobjekt[0]), '%05d' % (kunstobjekt[0]), kunstobjekt[1], kunstobjekt[2], kunstobjekt[3], kunstobjekt[4]))
-			table = ItemTable(items)
-			return render_template("searchresults.html", resulttable = table )
+		try:
+			kunstobjekter = kunstdatabase.searchrecords_RAM(searchword)
+			if kunstobjekter == None or len(kunstobjekter) < 1:
+				return render_template("searchfailed.html")
+			else:
+				#DISPLAY RESULTS
+				items = []
+				for kunstobjekt in kunstobjekter:
+					items.append(Item('%05d' % (kunstobjekt[0]), '%05d' % (kunstobjekt[0]), kunstobjekt[1], kunstobjekt[2], kunstobjekt[3], kunstobjekt[4]))
+				table = ItemTable(items)
+				return render_template("searchresults.html", resulttable = table )
+		except Exception as e:
+			print(f"Search failed due to database error: {e}")
+			return render_template("search.html", error="Google Sheets tilkobling feilet - database er ikke tilgjengelig")
 	else:
 		return render_template("search.html")
 
@@ -251,29 +263,37 @@ def reklame(imagefile):
 @app.route('/statistics')
 @requires_auth
 def statistics():
-	kunstdatabase.validate_salesdata()
-	artist_statistics = kunstdatabase.calculate_artiststats()
-	if artist_statistics != None:
-		items = []
-		for artist in artist_statistics:
-			items.append(StatsItem(artist[0], artist[1], artist[2]))
-		table = StatsTable(items)
-		return render_template("statistics.html", stats_table = table, loadtime = salesloader.getloadtime() )
-	else:
-		return redirect('/')
+	try:
+		kunstdatabase.validate_salesdata()
+		artist_statistics = kunstdatabase.calculate_artiststats()
+		if artist_statistics != None:
+			items = []
+			for artist in artist_statistics:
+				items.append(StatsItem(artist[0], artist[1], artist[2]))
+			table = StatsTable(items)
+			return render_template("statistics.html", stats_table = table, loadtime = salesloader.getloadtime() )
+		else:
+			return redirect('/')
+	except Exception as e:
+		print(f"Statistics page failed: {e}")
+		return render_template("statistics.html", stats_table = None, error="Google Sheets tilkobling feilet", loadtime="N/A")
 		
 @app.route('/pubstatistics')
 def pubstatistics():
-	kunstdatabase.validate_salesdata()
-	artist_statistics = kunstdatabase.calculate_artiststats()
-	if artist_statistics != None:
-		items = []
-		for artist in artist_statistics:
-			items.append(StatsItem(artist[0], artist[1], artist[2]))
-		table = PublicStatsTable(items)
-		return render_template("statistics.html", stats_table = table, loadtime = salesloader.getloadtime() )
-	else:
-		return redirect('/')
+	try:
+		kunstdatabase.validate_salesdata()
+		artist_statistics = kunstdatabase.calculate_artiststats()
+		if artist_statistics != None:
+			items = []
+			for artist in artist_statistics:
+				items.append(StatsItem(artist[0], artist[1], artist[2]))
+			table = PublicStatsTable(items)
+			return render_template("statistics.html", stats_table = table, loadtime = salesloader.getloadtime() )
+		else:
+			return redirect('/')
+	except Exception as e:
+		print(f"Public statistics page failed: {e}")
+		return render_template("statistics.html", stats_table = None, error="Google Sheets tilkobling feilet", loadtime="N/A")
 
 @app.route('/admin', methods=['GET', 'POST'])
 @requires_auth
@@ -297,13 +317,17 @@ def admin():
 			pass
 	elif request.method == 'GET':
 		pass
-	kunstdatabase.validate_database()
-	kunstdatabase.validate_salesdata()
-	antall_bilder = kunstdatabase.get_num_pictures()
-	antall_solgt = kunstdatabase.get_num_sold()
-	total_solgt = kunstdatabase.get_total_sold()
-	total_str = '{:,}'.format(total_solgt).replace(',',' ')
-	return render_template("admin.html", antall_bilder=antall_bilder, antall_solgt = antall_solgt, total_solgt = total_str)
+	try:
+		kunstdatabase.validate_database()
+		kunstdatabase.validate_salesdata()
+		antall_bilder = kunstdatabase.get_num_pictures()
+		antall_solgt = kunstdatabase.get_num_sold()
+		total_solgt = kunstdatabase.get_total_sold()
+		total_str = '{:,}'.format(total_solgt).replace(',',' ')
+		return render_template("admin.html", antall_bilder=antall_bilder, antall_solgt = antall_solgt, total_solgt = total_str)
+	except Exception as e:
+		print(f"Admin page database validation failed: {e}")
+		return render_template("admin.html", antall_bilder=0, antall_solgt=0, total_solgt="0", error="Google Sheets tilkobling feilet")
 
 #Se på bildet
 @app.route('/s/<string:kid>')
