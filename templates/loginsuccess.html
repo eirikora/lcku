@@ -1,77 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="no">
   <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-150363083-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-150363083-1');
-</script>
-
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>Høybråten Kunstutstilling - Login suksess</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body {
-  font-family: Arial;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-form.example input[type=text] {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  float: left;
-  width: 80%;
-  background: #f1f1f1;
-}
-
-form.example button {
-  float: left;
-  width: 20%;
-  padding: 10px;
-  background: #0c68b2;
-  color: white;
-  font-size: 17px;
-  border: 1px solid grey;
-  border-left: none;
-  cursor: pointer;
-}
-
-form.example button:hover {
-  background: #0b7dda;
-}
-
-form.example::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-.topheading {
-  display: flex;
-  justify-content: left;
-}
-
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Innlogging vellykket - Høybråten Kunstutstilling</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150363083-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-150363083-1');
+    </script>
   </head>
   <body>
-	<div class="topheading">
-		<div><a href="/"><img src="/images/Lions.png" width="80" height="80"></a></div>
-		<div><h1>Kunstdatabase</h1></div>
-	</div>
-	<p><b><font color="Green">Du klarte å logge inn!<br>Vennligst start igjen med å skanne bildet (du skal ikke ha behov for å logge inn igjen).</font></b></p>
+    <div class="topheading container">
+      <a href="/"><img src="/images/Lions.png" alt="Lions Logo"></a>
+      <h1>Innlogging vellykket</h1>
+    </div>
 
-	<br>
-		
-	<div>
-		<br><br>
-		<a href="/">(HOME)</a>
-	</div>
+    <div class="container">
+      <div class="card text-center" style="max-width: 600px; margin: 0 auto;">
+        <div class="alert alert-success mb-lg">
+          <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--success); margin-bottom: 1rem;"></i>
+          <h2 style="color: var(--success); margin-bottom: 0.5rem;">Du er nå logget inn!</h2>
+          <p class="mb-0">Vennligst start igjen med å skanne bildet. Du skal ikke ha behov for å logge inn igjen.</p>
+        </div>
+
+        <a href="/" class="btn btn-primary">
+          <i class="fas fa-home"></i> Gå til forsiden
+        </a>
+      </div>
+    </div>
   </body>
 </html>

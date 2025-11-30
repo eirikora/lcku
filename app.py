@@ -271,13 +271,13 @@ def statistics():
 			for artist in artist_statistics:
 				items.append(StatsItem(artist[0], artist[1], artist[2]))
 			table = StatsTable(items)
-			return render_template("statistics.html", stats_table = table, loadtime = salesloader.getloadtime() )
+			return render_template("statistics.html", stats_table = table, stats_data = artist_statistics, loadtime = salesloader.getloadtime() )
 		else:
 			return redirect('/')
 	except Exception as e:
 		print(f"Statistics page failed: {e}")
-		return render_template("statistics.html", stats_table = None, error="Google Sheets tilkobling feilet", loadtime="N/A")
-		
+		return render_template("statistics.html", stats_table = None, stats_data = None, error="Google Sheets tilkobling feilet", loadtime="N/A")
+
 @app.route('/pubstatistics')
 def pubstatistics():
 	try:
@@ -288,12 +288,12 @@ def pubstatistics():
 			for artist in artist_statistics:
 				items.append(StatsItem(artist[0], artist[1], artist[2]))
 			table = PublicStatsTable(items)
-			return render_template("statistics.html", stats_table = table, loadtime = salesloader.getloadtime() )
+			return render_template("statistics.html", stats_table = table, stats_data = artist_statistics, loadtime = salesloader.getloadtime() )
 		else:
 			return redirect('/')
 	except Exception as e:
 		print(f"Public statistics page failed: {e}")
-		return render_template("statistics.html", stats_table = None, error="Google Sheets tilkobling feilet", loadtime="N/A")
+		return render_template("statistics.html", stats_table = None, stats_data = None, error="Google Sheets tilkobling feilet", loadtime="N/A")
 
 @app.route('/admin', methods=['GET', 'POST'])
 @requires_auth

@@ -1,149 +1,93 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="no">
   <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-150363083-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-150363083-1');
-</script>
-
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>Høybråten Kunstutstilling - Utstilt objekt</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body {
-  font-family: Arial;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
-}
-
-th, td {
-  text-align: left;
-  padding: 16px;
-}
-
-tr:nth-child(odd) {
-  background-color: #f2f2f2
-}
-
-form.example input[type=text] {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  float: left;
-  width: 80%;
-  background: #f1f1f1;
-}
-
-form.example button {
-  float: left;
-  width: 20%;
-  padding: 10px;
-  background: #0c68b2;
-  color: white;
-  font-size: 17px;
-  border: 1px solid grey;
-  border-left: none;
-  cursor: pointer;
-}
-
-form.example button:hover {
-  background: #0b7dda;
-}
-
-form.example::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-.topheading {
-  display: flex;
-  justify-content: left;
-}
-
-p{
-  font-family: arial;
-  font-weight: bold;
-}
-.standard{
-  background-color: #2a609a;
-	width: 100%;
-	height: 60px;
-  color: white;
-  outline: none;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-.admin{
-  background-color: #2a609a;
-	width: 100%;
-	height: 60px;
-  color: white;
-  background: #aa0000;
-  outline: none;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.block-display button{
-  margin-bottom:5px;
-  display:block;
-}
-
-.button:hover{
-  background-color: #32CD32;
-  font-size: 20px;
-  transition: 0.5s;
-}
-
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ bildenavn }} - Høybråten Kunstutstilling</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150363083-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-150363083-1');
+    </script>
   </head>
   <body>
-	<div class="topheading">
-		<div><a href="/"><img src="/images/Lions.png" width="80" height="80"></a></div>
-		<div><h1>Utstilt objekt ved Høybråten Kunstutstilling</h1></div>
-	</div>
-    <div>
-    	<img src="/images/{{ bildefil }}" style="max-height: 300px; max-width: 300px">
-    	{% if ersolgt %}
-		<br><img src="/images/solgt.jpg" style="max-height: 100px; max-width: 100px">
-		{% endif %}
-    	<h2>{{ bildenavn }}</h2>
-    	<p><b>{{ kunstner }}</b> <small><a href="/search?q={{ kunstner }}"> Se alle ...</a></small></p>
-    	<p>Nr. {{ salgsid }}</p>
-    	<p>Pris: <b>{{ salgspris }},-</b></p>
-    	{% if kunstskatt %}
-		<p><i><small>(Kunstavgift inkludert iht. lov.)</small></i></p>
-		{% endif %}
-    	<p><i>{{ kommentar }}</p>
-	</div>
-	
-	<form class="menu" method="post" action="/navigate">
-		<div class="block-display">
-			<button class="standard" type="submit" formmethod="post" name="Kjøpe" value="{{ salgsid }}">Kjøp bildet nå</button>
-			<button class="standard" type="submit" formmethod="post" name="Inspirasjon">Inspirer meg!</button>
-			<button class="standard" type="submit" formmethod="post" name="Søke">Søk i databasen</button>
-		</div>
-	</form>
-	
-	<div>
-		<h2>Med god støtte fra en av våre flotte sponsorer:</h2>
-		<img src="/reklame/R{{ randomads }}.jpg" style="width: 100vw">
-	</div>
+    <div class="topheading container">
+      <a href="/"><img src="/images/Lions.png" alt="Lions Logo"></a>
+      <h1>Kunstverk på utstilling</h1>
+    </div>
+
+    <div class="container">
+      <div class="art-display">
+        <div style="text-align: center;">
+          <img src="/images/{{ bildefil }}" alt="{{ bildenavn }}" style="max-height: 500px; max-width: 100%;">
+          {% if ersolgt %}
+          <div class="sold-badge mt-md">
+            <i class="fas fa-check-circle"></i> SOLGT
+          </div>
+          {% endif %}
+        </div>
+
+        <h2 class="mt-lg">{{ bildenavn }}</h2>
+
+        <div class="artist">
+          <i class="fas fa-palette"></i> {{ kunstner }}
+          <a href="/search?q={{ kunstner }}" class="text-small ml-md">
+            Se alle verk <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <p class="text-muted mb-md">
+          <i class="fas fa-tag"></i> Salgsnummer: {{ salgsid }}
+        </p>
+
+        <div class="price">
+          <i class="fas fa-euro-sign"></i> {{ salgspris }},-
+        </div>
+
+        {% if kunstskatt %}
+        <p class="text-small text-muted">
+          <i class="fas fa-info-circle"></i> Kunstavgift inkludert iht. lov
+        </p>
+        {% endif %}
+
+        {% if kommentar %}
+        <p class="mt-md text-muted">
+          <i class="fas fa-comment"></i> <em>{{ kommentar }}</em>
+        </p>
+        {% endif %}
+      </div>
+
+      <div class="card">
+        <form method="post" action="/navigate">
+          <div class="block-display">
+            {% if not ersolgt %}
+            <button class="btn btn-success" type="submit" name="Kjøpe" value="{{ salgsid }}">
+              <i class="fas fa-shopping-cart"></i> Kjøp bildet nå
+            </button>
+            {% else %}
+            <button class="btn btn-primary" type="submit" name="Inspirasjon">
+              <i class="fas fa-lightbulb"></i> Se andre kunstverk
+            </button>
+            {% endif %}
+            <button class="btn btn-primary" type="submit" name="Inspirasjon">
+              <i class="fas fa-random"></i> Inspirer meg!
+            </button>
+            <button class="btn btn-primary" type="submit" name="Søke">
+              <i class="fas fa-search"></i> Søk i databasen
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="sponsor-section">
+        <h2>Med god støtte fra våre sponsorer</h2>
+        <img src="/reklame/R{{ randomads }}.jpg" alt="Sponsor">
+      </div>
+    </div>
   </body>
 </html>

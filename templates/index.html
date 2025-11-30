@@ -1,133 +1,67 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="no">
   <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-150363083-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-150363083-1');
-</script>
-
-  	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <title>Høybråten Kunstutstilling - Kunstdatabase</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body {
-  font-family: Arial;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
-}
-
-th, td {
-  text-align: left;
-  padding: 16px;
-}
-
-tr:nth-child(odd) {
-  background-color: #f2f2f2
-}
-
-form.menu::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.containermenu {
-  display: flex;
-  justify-content: space-between;
-}
-
-.topheading {
-  display: flex;
-  justify-content: left;
-}
-
-p{
-  font-family: arial;
-  font-weight: bold;
-}
-.standard{
-  background-color: #2a609a;
-	width: 100%;
-	height: 60px;
-  color: white;
-  outline: none;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-.status{
-  font-size: 14px;
-  font-style: italic;
-}
-.admin{
-  background-color: #2a609a;
-	width: 100%;
-	height: 60px;
-  color: white;
-  background: #aa0000;
-  outline: none;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.block-display button{
-  margin-bottom:5px;
-  display:block;
-}
-
-.button:hover{
-  background-color: #32CD32;
-  font-size: 20px;
-  transition: 0.5s;
-}
-
-</style>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150363083-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-150363083-1');
+    </script>
   </head>
   <body>
-	<div class="topheading">
-		<div><img src="/images/Lions.png" width="80" height="80"></div>
-		<div><h1>Kunstdatabase</h1></div>
-	</div>
-   
-    <div>
-		<b>Hovedside - valg av oppgave.</b><br><br>
-	</div>
-	<div class="status">Status: {{ antall_bilder }} bilder - {{ antall_solgt }} solgt<br>
-	</div>
-	{% if error %}
-	<div style="background-color: #ffcccc; border: 1px solid #ff0000; padding: 10px; margin: 10px 0; color: #cc0000; font-weight: bold;">
-		⚠️ FEIL: {{ error }}. Databasen er ikke tilgjengelig.
-	</div>
-	{% endif %}
+    <div class="topheading container">
+      <a href="/"><img src="/images/Lions.png" alt="Lions Logo"></a>
+      <h1>Kunstdatabase</h1>
+    </div>
 
-	
-	    <form class="menu" method="post" action="/">
-	    	<div class="block-display">
- 				<button class="standard" type="submit" formmethod="post" name="Søke">Søke KunstDB</button>
- 				<button class="standard" type="submit" formmethod="post" name="Statistikk">Hvem selger mest?</button>
- 				<button class="standard" type="submit" formmethod="post" name="Støtte">Hva går inntekten til?</button>
-  				<button class="standard" type="submit" formmethod="post" name="Homepage">Om Høybråten Lions</button>
-  				<button class="standard" type="submit" formmethod="post" name="Facebook">Lik og følg oss på Facebook</button>
-  				<button class="admin" type="submit" formmethod="post" name="Admin">Administrasjon</button>
-			</div>
+    <div class="container">
+      <div class="card">
+        <p class="mb-lg"><strong>Velkommen til Høybråten Lions Kunstutstilling</strong></p>
+
+        <div class="status">
+          <i class="fas fa-images"></i> {{ antall_bilder }} bilder registrert
+          <span class="mx-2">•</span>
+          <i class="fas fa-check-circle"></i> {{ antall_solgt }} solgt
+        </div>
+
+        {% if error %}
+        <div class="alert alert-error">
+          <i class="fas fa-exclamation-triangle"></i> <strong>Feil:</strong> {{ error }}. Databasen er ikke tilgjengelig.
+        </div>
+        {% endif %}
+
+        <form method="post" action="/">
+          <div class="block-display">
+            <button class="btn btn-primary" type="submit" name="Søke">
+              <i class="fas fa-search"></i> Søke KunstDB
+            </button>
+            <button class="btn btn-primary" type="submit" name="Statistikk">
+              <i class="fas fa-chart-bar"></i> Hvem selger mest?
+            </button>
+            <button class="btn btn-primary" type="submit" name="Støtte">
+              <i class="fas fa-heart"></i> Hva går inntekten til?
+            </button>
+            <button class="btn btn-primary" type="submit" name="Homepage">
+              <i class="fas fa-home"></i> Om Høybråten Lions
+            </button>
+            <button class="btn btn-primary" type="submit" name="Facebook">
+              <i class="fab fa-facebook"></i> Lik og følg oss på Facebook
+            </button>
+            <button class="btn btn-admin" type="submit" name="Admin">
+              <i class="fas fa-lock"></i> Administrasjon
+            </button>
+          </div>
         </form>
-	</div>
+      </div>
+    </div>
 
   </body>
 </html>
