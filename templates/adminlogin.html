@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin innlogging - Høybråten Kunstutstilling</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150363083-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-150363083-1');
+    </script>
+  </head>
+  <body>
+    <div class="topheading container">
+      <a href="/"><img src="/images/Lions.png" alt="Lions Logo"></a>
+      <h1>Admin innlogging</h1>
+    </div>
+
+    <div class="container">
+      <div class="card" style="max-width: 500px; margin: 0 auto;">
+        <h2 class="mb-md">
+          <i class="fas fa-shield-alt"></i> Logg inn som administrator
+        </h2>
+
+        {% if error %}
+        <div class="alert alert-error mb-lg">
+          <i class="fas fa-exclamation-triangle"></i>
+          <strong>Innlogging feilet!</strong> {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="alert alert-info mb-lg">
+          <i class="fas fa-info-circle"></i>
+          Kun for autoriserte administratorer. Bruk ditt admin brukernavn og passord.
+        </div>
+
+        <form class="form-login" action="/adminlogin" method="POST">
+          <input type="text" placeholder="Brukernavn" name="username" required autofocus>
+          <input type="password" placeholder="Passord" name="password" required>
+          <button type="submit" class="btn btn-admin">
+            <i class="fas fa-sign-in-alt"></i> Logg inn som admin
+          </button>
+        </form>
+
+        <div class="text-center mt-lg">
+          <a href="/" class="nav-link">
+            <i class="fas fa-arrow-left"></i> Tilbake til forsiden
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

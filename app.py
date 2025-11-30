@@ -72,27 +72,18 @@ def before_request():
 	session.permanent = True
 
 #Functions for secure access
-def check_auth(username, password):
-    """This function is called to check if a username /
-    password combination is valid.
-    """
+def check_admin_auth(username, password):
+    """This function is called to check if admin username/password is valid."""
     accepted_username = getsecret("ADMIN_LOGIN")
     accepted_password = getsecret("ADMIN_PASSORD")
     return username == accepted_username and password == accepted_password
 
-def authenticate():
-    """Sends a 401 response that enables basic auth"""
-    return Response(
-    'Could not verify your access level for that URL.\n'
-    'You have to login with proper credentials', 401,
-    {'WWW-Authenticate': 'Basic realm="Login Required"'})
-
-def requires_auth(f):
+def requires_admin(f):
+    """Decorator to require admin login via session"""
     @wraps(f)
     def decorated(*args, **kwargs):
-        auth = request.authorization
-        if not auth or not check_auth(auth.username, auth.password):
-            return authenticate()
+        if not session.get('admin_logged_in'):
+            return redirect('/adminlogin')
         return f(*args, **kwargs)
     return decorated
 
@@ -160,7 +151,7 @@ def search():
 		return render_template("search.html")
 
 @app.route("/picklabels", methods=['GET', 'POST'])
-@requires_auth
+@requires_admin
 def picklabels(): # User picks the pictures to include
 	if 'valgtebilder' in session:
 		valgtebilder = session['valgtebilder']
@@ -261,7 +252,7 @@ def reklame(imagefile):
 	return send_from_directory(os.path.join(app.root_path, 'reklame'), imagefile, mimetype='image/jpeg')
  
 @app.route('/statistics')
-@requires_auth
+@requires_admin
 def statistics():
 	try:
 		kunstdatabase.validate_salesdata()
@@ -296,7 +287,7 @@ def pubstatistics():
 		return render_template("statistics.html", stats_table = None, stats_data = None, error="Google Sheets tilkobling feilet", loadtime="N/A")
 
 @app.route('/admin', methods=['GET', 'POST'])
-@requires_auth
+@requires_admin
 def admin():
 	if request.method == 'POST':
 		if 'LasteGS' in request.form:
@@ -413,6 +404,27 @@ def login():
 			return render_template("loginsuccess.html") 
 		return render_template("loginfailed.html")
 	return render_template("login.html")
+
+@app.route('/adminlogin', methods=['GET', 'POST'])
+def adminlogin():
+	if request.method == 'POST':
+		username = request.form.get('username', '')
+		password = request.form.get('password', '')
+
+		if check_admin_auth(username, password):
+			session['admin_logged_in'] = True
+			session['admin_username'] = username
+			return redirect('/admin')
+		else:
+			return render_template("adminlogin.html", error="Feil brukernavn eller passord")
+
+	return render_template("adminlogin.html")
+
+@app.route('/adminlogout')
+def adminlogout():
+	session.pop('admin_logged_in', None)
+	session.pop('admin_username', None)
+	return redirect('/')
 
 @app.route('/logout')
 def logout():
